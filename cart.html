@@ -363,6 +363,7 @@ input {
     transform: rotateY(180deg);
 }
     </style>
+    <script src="https://unpkg.com/imask"></script>
 </head>
 <body>
     <div class="payment-title">
@@ -488,7 +489,9 @@ input {
             <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
         </div>
     </div>
+    
     <script>
+
         window.onload = function () {
 
 const name = document.getElementById('name');

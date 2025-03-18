@@ -295,7 +295,7 @@ nav ul li a:hover {
 }
 
 .about-img img {
-    width: 100%;
+    width: 70%;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -514,7 +514,50 @@ footer {
 .back-to-top:hover {
     background-color: #8a6642;
 }
+/* Style pour le logo dans la bannière */
+.hero-logo {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    position: absolute; /* Position absolue pour sortir du flux normal */
+    left: -30px; /* Position ajustée de 50px supplémentaires vers la gauche (20px-50px) */
+    top: 100px; /* Position ajustée de 50px vers le haut (150px-50px) */
+    z-index: 1; /* S'assurer que le logo apparaît au-dessus des autres éléments */
+}
 
+/* Règles de responsivité pour le logo */
+@media (max-width: 768px) {
+    .hero-content {
+        text-align: center;
+        padding-left: 20px; /* Rétablir le padding normal sur mobile */
+        padding-top: 220px; /* Espace pour le logo qui sera au-dessus */
+    }
+    
+    .hero-logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%); /* Centrer horizontalement */
+        top: 20px; /* Positionner en haut */
+    }
+}
+
+/* Ajustements pour la section hero */
+.hero-content {
+    padding: 30px 20px;
+    padding-left: 230px; /* Espace pour le logo à gauche */
+    position: relative; /* Pour le positionnement absolu du logo */
+}
+
+/* Suppression de la div about-img devenue inutile */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-text {
+    width: 100%;
+}
 /* Responsive - Amélioré pour smartphones et tablettes */
 @media screen and (max-width: 992px) {
     /* Tablettes */
