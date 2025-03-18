@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Paiement - Galerie d'Art</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles spécifiques pour la page de paiement */
+        .payment-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #edcdaf;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .payment-header h2 {
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .payment-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .payment-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background-color: #ddd;
+            z-index: 1;
+        }
+        
+        .step {
+            width: 33.33%;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #a67c52;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+        
+        .step.active .step-number {
+            background-color: #8a6642;
+        }
+        
+        .step-label {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .step.active .step-label {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .payment-section {
+            margin-bottom: 30px;
+        }
+        
+        .payment-section h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 25px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .payment-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .payment-summary {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .summary-total {
+            font-weight: bold;
+            padding-top: 10px;
+            margin-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .payment-steps::before {
+                left: 30px;
+                right: 30px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .payment-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .payment-actions .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>GALERIE<span>ART</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html#accueil">Accueil</a></li>
+                        <li><a href="index.html#galerie">Galerie</a></li>
+                        <li><a href="boutique.html">Boutique</a></li>
+                        <li><a href="index.html#a-propos">À propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <div class="payment-container">
+            <div class="payment-header">
+                <h2>Finaliser votre commande</h2>
+                <p>Cette page sera remplacée par votre système de paiement personnalisé.</p>
+            </div>
+            
+            <div class="payment-steps">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Informations</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Paiement</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+            
+            <div class="payment-summary">
+                <h3>Récapitulatif de la commande</h3>
+                <div class="summary-item">
+                    <span>Œuvre d'art</span>
+                    <span id="product-name">Nom de l'œuvre</span>
+                </div>
+                <div class="summary-item">
+                    <span>Artiste</span>
+                    <span id="artist-name">Nom de l'artiste</span>
+                </div>
+                <div class="summary-item">
+                    <span>Prix de l'œuvre</span>
+                    <span id="product-price">0 €</span>
+                </div>
+                <div class="summary-item">
+                    <span>Frais de livraison</span>
+                    <span>50 €</span>
+                </div>
+                <div class="summary-item summary-total">
+                    <span>Total</span>
+                    <span id="total-price">0 €</span>
+                </div>
+            </div>
+            
+            <div class="payment-section">
+                <h3>Informations personnelles</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstname">Prénom</label>
+                        <input type="text" id="firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Nom</label>
+                        <input type="text" id="lastname" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Téléphone</label>
+                    <input type="tel" id="phone" required>
+                </div>
+            </div>
+            
+            <div class="payment-section">
+                <h3>Adresse de livraison</h3>
+                <div class="form-group">
+                    <label for="address">Adresse</label>
+                    <input type="text" id="address" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="postal">Code postal</label>
+                        <input type="text" id="postal" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Ville</label>
+                        <input type="text" id="city" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country">Pays</label>
+                    <select id="country" required>
+                        <option value="">Sélectionner un pays</option>
+                        <option value="FR">France</option>
+                        <option value="BE">Belgique</option>
+                        <option value="CH">Suisse</option>
+                        <option value="CA">Canada</option>
+                        <option value="LU">Luxembourg</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="payment-actions">
+                <a href="boutique.html" class="btn" style="background-color: #999;">Retour à la boutique</a>
+                <a href="#" class="btn">Continuer vers le paiement</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#">FB</a>
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">PT</a>
+                </div>
+                <div class="footer-links">
+                    <a href="#cgv-modal" class="footer-link">Conditions Générales de Vente</a>
+                    <a href="#retour-modal" class="footer-link">Service de Retour</a>
+                </div>
+                <p>&copy; 2025 GalerieArt. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bouton retour en haut -->
+    <div id="back-to-top" class="back-to-top">
+        <a href="#accueil">↑</a>
+    </div>
+    
+    <script src="scripts.js"></script>
+    <script>
+        // Script pour récupérer les informations de l'œuvre depuis l'URL
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ce script sera remplacé par votre système de paiement réel
+            // Actuellement, il affiche simplement des informations fictives
+            document.getElementById('product-name').textContent = "Éclats d'Azur";
+            document.getElementById('artist-name').textContent = "Sophie Dumont";
+            document.getElementById('product-price').textContent = "850 €";
+            document.getElementById('total-price').textContent = "900 €";
+        });
+    </script>
+</body>
+</html>

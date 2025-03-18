@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Boutique - Galerie d'Art</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles spécifiques pour la boutique */
+        .shop-header {
+            height: 300px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/300') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+        
+        .shop-header h2 {
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        
+        .shop-header p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 60px 0;
+        }
+        
+        .product-card {
+            background-color: #edcdaf;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 280px;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-details {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-size: 20px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .product-artist {
+            color: #777;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+        
+        .product-description {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #555;
+            flex-grow: 1;
+        }
+        
+        .product-price {
+            font-size: 22px;
+            font-weight: 600;
+            color: #a67c52;
+            margin-bottom: 15px;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-actions .btn {
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #a67c52;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .shop-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            padding: 8px 12px;
+            padding-right: 40px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 250px;
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 40px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: #a67c52;
+            cursor: pointer;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .shop-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-box, .search-box input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>GALERIE<span>ART</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html#accueil">Accueil</a></li>
+                        <li><a href="index.html#galerie">Galerie</a></li>
+                        <li><a href="boutique.html" class="active">Boutique</a></li>
+                        <li><a href="index.html#a-propos">À propos</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Bannière de la boutique -->
+    <div class="shop-header">
+        <div class="container">
+            <h2>Notre Boutique en Ligne</h2>
+            <p>Découvrez et achetez des œuvres uniques sélectionnées par notre galerie.</p>
+        </div>
+    </div>
+    
+    <!-- Contenu principal de la boutique -->
+    <div class="container">
+        <!-- Filtres et recherche -->
+        <div class="shop-filters">
+            <div class="filter-group">
+                <label for="sort-by">Trier par:</label>
+                <select id="sort-by">
+                    <option value="recent">Plus récents</option>
+                    <option value="price-low">Prix croissant</option>
+                    <option value="price-high">Prix décroissant</option>
+                    <option value="artist">Artiste</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="filter-by">Filtrer par:</label>
+                <select id="filter-by">
+                    <option value="all">Tous les styles</option>
+                    <option value="abstract">Art abstrait</option>
+                    <option value="landscape">Paysages</option>
+                    <option value="portrait">Portraits</option>
+                    <option value="still-life">Natures mortes</option>
+                </select>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Rechercher une œuvre ou un artiste...">
+                <button>🔍</button>
+            </div>
+        </div>
+        
+        <!-- Grille de produits -->
+        <div class="product-grid">
+            <!-- Produit 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/elephant.jpg" alt="Éclats d'Azur">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-title">Éclats d'Azur</h3>
+                    <p class="product-artist">par Sophie Dumont</p>
+                    <p class="product-description">Une composition abstraite aux tons bleus évoquant la mer et le ciel, réalisée à l'acrylique sur toile.</p>
+                    <p class="product-price">850 €</p>
+                    <div class="product-actions">
+                        <a href="payment.html" class="btn">Payer</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produit 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/Image (10).jpg" alt="Montagnes au Crépuscule">
+                    <div class="discount-badge">-15%</div>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-title">Montagnes au Crépuscule</h3>
+                    <p class="product-artist">par Antoine Lefebvre</p>
+                    <p class="product-description">Paysage montagneux au coucher de soleil, réalisé à l'huile sur toile dans un style impressionniste.</p>
+                    <p class="product-price">1 200 €</p>
+                    <div class="product-actions">
+                        <a href="payment.html" class="btn">Payer</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produit 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/Image (11).jpg" alt="Regard Intérieur">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-title">Regard Intérieur</h3>
+                    <p class="product-artist">par Élise Martin</p>
+                    <p class="product-description">Portrait contemporain explorant l'identité et l'introspection, technique mixte sur toile.</p>
+                    <p class="product-price">980 €</p>
+                    <div class="product-actions">
+                        <a href="payment.html" class="btn">Payer</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produit 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/Image (12).jpg" alt="Composition aux Fruits">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-title">Composition aux Fruits</h3>
+                    <p class="product-artist">par Michel Dubois</p>
+                    <p class="product-description">Nature morte contemporaine revisitant les codes classiques, huile sur toile.</p>
+                    <p class="product-price">750 €</p>
+                    <div class="product-actions">
+                        <a href="payment.html" class="btn">Payer</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produit 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/Image (13).jpg" alt="Urban Dream">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-title">Urban Dream</h3>
+                    <p class="product-artist">par Léo Vaillant</p>
+                    <p class="product-description">Œuvre inspirée de l'art urbain, mêlant graffiti et techniques traditionnelles sur toile.</p>
+                    <p class="product-price">1 100 €</p>
+                    <div class="product-actions">
+                        <a href="payment.html" class="btn">Payer</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Produit 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="/Image (14).jpg" alt="Floraison Sauvage">
+                    <div class="discount-badge">-10%</div>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-title">Floraison Sauvage</h3>
+                    <p class="product-artist">par Claire Fontaine</p>
+                    <p class="product-description">Composition florale aux couleurs vives, acrylique et techniques mixtes sur grande toile.</p>
+                    <p class="product-price">920 €</p>
+                    <div class="product-actions">
+                        <a href="payment.html" class="btn">Payer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#">FB</a>
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">PT</a>
+                </div>
+                <div class="footer-links">
+                    <a href="#cgv-modal" class="footer-link">Conditions Générales de Vente</a>
+                    <a href="#retour-modal" class="footer-link">Service de Retour</a>
+                </div>
+                <p>&copy; 2025 GalerieArt. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bouton retour en haut -->
+    <div id="back-to-top" class="back-to-top">
+        <a href="#accueil">↑</a>
+    </div>
+    
+    <script src="scripts.js"></script>
+</body>
+</html>
