@@ -4,576 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Galerie d'Art - Exposition et Vente de Toiles</title>
-    <style>
-        /* Styles généraux */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        body {
-            background-color: #ffecc6;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        /* En-tête */
-        header {
-            background-color: #edcdaf;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        
-        .logo span {
-            font-weight: 600;
-            color: #a67c52;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 30px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: #a67c52;
-        }
-        
-        /* Bannière */
-        .hero {
-            height: 500px;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/500') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #fff;
-            padding: 0 20px;
-        }
-        
-        .hero-content h2 {
-            font-size: 48px;
-            font-weight: 300;
-            margin-bottom: 20px;
-        }
-        
-        .hero-content p {
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: #a67c52;
-            color: #fff;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #8a6642;
-        }
-        
-        /* Galerie */
-        .gallery {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h3 {
-            font-size: 36px;
-            font-weight: 300;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-        
-        .section-title h3::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 3px;
-            background-color: #a67c52;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .artworks {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .artwork {
-            background-color: #edcdaf;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-        
-        .artwork:hover {
-            transform: translateY(-10px);
-        }
-        
-        .artwork-img {
-            height: 250px;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .artwork-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .artwork:hover .artwork-img img {
-            transform: scale(1.1);
-        }
-        
-        .zoom-icon {
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-            background-color: rgba(255, 255, 255, 0.7);
-            color: #333;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-            z-index: 5;
-        }
-        
-        .artwork-link {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        
-        .artwork-info {
-            padding: 20px;
-        }
-        
-        .artwork-info h4 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-        
-        .artwork-info p.artist {
-            color: #777;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-        
-        .artwork-info p.description {
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #555;
-        }
-        
-        .price {
-            font-size: 22px;
-            font-weight: 600;
-            color: #a67c52;
-            margin-bottom: 15px;
-        }
-        
-        /* Zoom container */
-        .zoom-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            overflow: hidden;
-            text-align: center;
-        }
-        
-        .zoom-container:target {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .zoom-content {
-            position: relative;
-            width: 90%;
-            height: 90%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        
-        .zoom-img {
-            max-width: 100%;
-            max-height: 80vh;
-            object-fit: contain;
-            cursor: zoom-in;
-            transition: transform 0.3s;
-            transform-origin: center center;
-        }
-        
-        .zoom-controls {
-            margin-top: 20px;
-            display: flex;
-            gap: 20px;
-        }
-        
-        .zoom-btn {
-            background-color: #a67c52;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        
-        .zoom-btn:hover {
-            background-color: #8a6642;
-        }
-        
-        .zoom-info {
-            color: white;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-        
-        /* À propos */
-        .about {
-            padding: 80px 0;
-            background-color: #e0cda9;
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .about-img {
-            flex: 1;
-        }
-        
-        .about-img img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-text h3 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-        
-        .about-text p {
-            margin-bottom: 15px;
-        }
-        
-        /* Contact */
-        .contact {
-            padding: 80px 0;
-            background-color: #ffecc6;
-        }
-        
-        .contact-content {
-            display: flex;
-            gap: 50px;
-        }
-        
-        .contact-info {
-            flex: 1;
-        }
-        
-        .contact-info h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        
-        .contact-info p {
-            margin-bottom: 15px;
-        }
-        
-        .contact-info .info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .contact-info .info-item i {
-            font-size: 20px;
-            margin-right: 15px;
-            color: #a67c52;
-        }
-        
-        .contact-form {
-            flex: 1;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-        
-        /* Modales */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        
-        .modal:target {
-            display: block;
-        }
-        
-        .modal-content {
-            background-color: #edcdaf;
-            margin: 50px auto;
-            padding: 30px;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 8px;
-            position: relative;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            color: #333;
-            text-decoration: none;
-        }
-        
-        .close-modal:hover {
-            color: #a67c52;
-        }
-        
-        .modal-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #a67c52;
-        }
-        
-        /* Pied de page */
-        footer {
-            background-color: #a67c52;
-            color: #fff;
-            padding: 30px 0;
-            text-align: center;
-        }
-        
-        .footer-content p {
-            margin-bottom: 15px;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .social-links a {
-            color: #fff;
-            font-size: 20px;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: #edcdaf;
-        }
-        
-        /* Footer Amélioré */
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 15px;
-        }
-        
-        .footer-link {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-link:hover {
-            color: #edcdaf;
-            text-decoration: underline;
-        }
-        
-        /* Responsive - Amélioré pour smartphones et tablettes */
-        @media screen and (max-width: 992px) {
-            /* Tablettes */
-            .artworks {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .hero-content h2 {
-                font-size: 42px;
-            }
-            
-            .about-content,
-            .contact-content {
-                gap: 30px;
-            }
-        }
-        
-        @media screen and (max-width: 768px) {
-            /* Petites tablettes */
-            .header-content {
-                flex-direction: column;
-            }
-            
-            nav ul {
-                margin-top: 15px;
-            }
-            
-            nav ul li {
-                margin-left: 15px;
-                margin-right: 15px;
-            }
-            
-            .about-content,
-            .contact-content {
-                flex-direction: column;
-            }
-            
-            .hero-content h2 {
-                font-size: 36px;
-            }
-            
-            .hero {
-                height: 400px;
-            }
-        }
-        
-        @media screen and (max-width: 576px) {
-            /* Smartphones */
-            .artworks {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-content h2 {
-                font-size: 28px;
-            }
-            
-            .hero-content p {
-                font-size: 16px;
-            }
-            
-            .hero {
-                height: 350px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .section-title h3 {
-                font-size: 28px;
-            }
-            
-            .about-text h3 {
-                font-size: 24px;
-            }
-            
-            .btn {
-                padding: 10px 25px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- En-tête -->
@@ -614,102 +45,116 @@
                 <!-- Oeuvre 1 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="/elephant.jpg" alt="Toile elephant">
+                        <img src="/elephant.jpg" alt="Toile elephant" data-title="Éclats d'Azur">
                         <div class="zoom-icon" title="Voir en détail">🔍</div>
-                        <a href="#zoom-1" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Éclats d'Azur</h4>
                         <p class="artist">par Sophie Dumont</p>
                         <p class="description">Une composition abstraite aux tons bleus évoquant la mer et le ciel, réalisée à l'acrylique sur toile.</p>
                         <p class="price">850 €</p>
-                        <a href="#" class="btn">Acheter</a>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
                     </div>
                 </div>
                 
                 <!-- Oeuvre 2 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="/Image (10).jpg" alt="Paysage montagneux">
+                        <img src="/Image (10).jpg" alt="Paysage montagneux" data-title="Montagnes au Crépuscule">
                         <div class="zoom-icon" title="Voir en détail">🔍</div>
-                        <a href="#zoom-2" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Montagnes au Crépuscule</h4>
                         <p class="artist">par Antoine Lefebvre</p>
                         <p class="description">Paysage montagneux au coucher de soleil, réalisé à l'huile sur toile dans un style impressionniste.</p>
                         <p class="price">1 200 €</p>
-                        <a href="#" class="btn">Acheter</a>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
                     </div>
                 </div>
                 
                 <!-- Oeuvre 3 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="/Image (11).jpg" alt="Portrait contemporain">
+                        <img src="/Image (11).jpg" alt="Portrait contemporain" data-title="Regard Intérieur">
                         <div class="zoom-icon" title="Voir en détail">🔍</div>
-                        <a href="#zoom-3" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Regard Intérieur</h4>
                         <p class="artist">par Élise Martin</p>
                         <p class="description">Portrait contemporain explorant l'identité et l'introspection, technique mixte sur toile.</p>
                         <p class="price">980 €</p>
-                        <a href="#" class="btn">Acheter</a>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
                     </div>
                 </div>
                 
                 <!-- Oeuvre 4 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="/Image (12).jpg" alt="Nature morte">
+                        <img src="/Image (12).jpg" alt="Nature morte" data-title="Composition aux Fruits">
                         <div class="zoom-icon" title="Voir en détail">🔍</div>
-                        <a href="#zoom-4" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Composition aux Fruits</h4>
                         <p class="artist">par Michel Dubois</p>
                         <p class="description">Nature morte contemporaine revisitant les codes classiques, huile sur toile.</p>
                         <p class="price">750 €</p>
-                        <a href="#" class="btn">Acheter</a>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
                     </div>
                 </div>
                 
                 <!-- Oeuvre 5 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="/Image (13).jpg" alt="Art urbain">
+                        <img src="/Image (13).jpg" alt="Art urbain" data-title="Urban Dream">
                         <div class="zoom-icon" title="Voir en détail">🔍</div>
-                        <a href="#zoom-5" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Urban Dream</h4>
                         <p class="artist">par Léo Vaillant</p>
                         <p class="description">Œuvre inspirée de l'art urbain, mêlant graffiti et techniques traditionnelles sur toile.</p>
                         <p class="price">1 100 €</p>
-                        <a href="#" class="btn">Acheter</a>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
                     </div>
                 </div>
                 
                 <!-- Oeuvre 6 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="/api/placeholder/400/320" alt="Peinture florale">
+                        <img src="/Image (14).jpg" alt="Peinture florale" data-title="Floraison Sauvage">
                         <div class="zoom-icon" title="Voir en détail">🔍</div>
-                        <a href="#zoom-6" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Floraison Sauvage</h4>
                         <p class="artist">par Claire Fontaine</p>
                         <p class="description">Composition florale aux couleurs vives, acrylique et techniques mixtes sur grande toile.</p>
                         <p class="price">920 €</p>
-                        <a href="#" class="btn">Acheter</a>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-     
+    <!-- À propos -->
+    <section class="about" id="a-propos">
+        <div class="container">
+            <div class="section-title">
+                <h3>À Propos de la Galerie</h3>
+            </div>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="/api/placeholder/600/400" alt="Notre galerie">
+                </div>
+                <div class="about-text">
+                    <h3>Une passion pour l'art depuis 2010</h3>
+                    <p>Fondée en 2010, notre galerie est dédiée à la promotion de l'art contemporain sous toutes ses formes. Nous mettons un point d'honneur à soutenir aussi bien les artistes renommés que les talents émergents.</p>
+                    <p>Notre espace d'exposition physique, situé en plein cœur de la ville, vous accueille du mardi au samedi pour vous permettre de découvrir nos œuvres dans un cadre chaleureux et propice à l'échange.</p>
+                    <p>Grâce à notre plateforme en ligne, nous rendons l'art accessible à tous, partout en France et à l'international. Chaque œuvre est minutieusement sélectionnée pour sa qualité et son originalité.</p>
+                    <a href="#contact" class="btn">Nous Contacter</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact -->
     <section class="contact" id="contact">
@@ -781,105 +226,10 @@
         </div>
     </footer>
     
-    <!-- Zoom containers -->
-    <!-- Zoom pour Oeuvre 1 -->
-    <div id="zoom-1" class="zoom-container">
+    <!-- Zoom Modal (unique pour toutes les images) -->
+    <div id="zoom-modal" class="zoom-container">
         <div class="zoom-content">
-            <img src="/elephant.jpg" alt="Éclats d'Azur - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="zoom-2" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/Image (10).jpg" alt="Éclats d'Azur - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="zoom-3" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/Image (11).jpg" alt="Éclats d'Azur - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="zoom-4" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/Image (12).jpg" alt="Éclats d'Azur - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="zoom-5" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/Image (13).jpg" alt="Éclats d'Azur - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="zoom-6" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/Image (14).jpg" alt="Éclats d'Azur - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="zoom-7" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/Image (15).jpg" alt="Éclats d'Azur - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="zoom-8" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/Image (16).jpg" alt="Éclats d'Azur - vue détaillée" class="zoom-img">
+            <img src="" alt="" class="zoom-img" id="modal-image">
             <div class="zoom-info">Zoom: 100%</div>
             <div class="zoom-controls">
                 <button class="zoom-btn zoom-in">Zoom +</button>
@@ -968,130 +318,11 @@
         </div>
     </div>
 
-    <!-- Script pour les fonctionnalités de zoom -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Variables pour la fonction de zoom
-            let scale = 1;
-            const zoomFactor = 0.2;
-            const maxZoom = 3;
-            const minZoom = 1;
-            
-            // Ajouter les gestionnaires d'événements aux boutons de zoom
-            document.querySelectorAll('.zoom-in').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (scale < maxZoom) {
-                        scale += zoomFactor;
-                        updateZoom();
-                    }
-                });
-            });
-            
-            document.querySelectorAll('.zoom-out').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (scale > minZoom) {
-                        scale -= zoomFactor;
-                        updateZoom();
-                    }
-                });
-            });
-            
-            document.querySelectorAll('.zoom-reset').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    scale = 1;
-                    updateZoom();
-                });
-            });
-            
-            // Mettre à jour le zoom
-            function updateZoom() {
-                const zoomImg = document.querySelectorAll('.zoom-img');
-                zoomImg.forEach(img => {
-                    img.style.transform = `scale(${scale})`;
-                });
-                
-                const zoomInfo = document.querySelectorAll('.zoom-info');
-                zoomInfo.forEach(info => {
-                    info.textContent = `Zoom: ${Math.round(scale * 100)}%`;
-                });
-            }
-            
-            // Permettre le zoom avec la molette de la souris
-            document.querySelectorAll('.zoom-content').forEach(content => {
-                content.addEventListener('wheel', function(e) {
-                    e.preventDefault();
-                    if (e.deltaY < 0 && scale < maxZoom) {
-                        scale += zoomFactor;
-                    } else if (e.deltaY > 0 && scale > minZoom) {
-                        scale -= zoomFactor;
-                    }
-                    updateZoom();
-                });
-            });
-        });
-    </script>
-</body>
-</html> class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
+    <!-- Bouton de retour en haut de page -->
+    <div id="back-to-top" class="back-to-top">
+        <a href="#accueil">↑</a>
     </div>
-    
-    <!-- Zoom pour Oeuvre 2 -->
-    <div id="zoom-2" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/api/placeholder/800/640" alt="Montagnes au Crépuscule - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Zoom pour Oeuvre 3 -->
-    <div id="zoom-3" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/api/placeholder/800/640" alt="Regard Intérieur - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Zoom pour Oeuvre 4 -->
-    <div id="zoom-4" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/api/placeholder/800/640" alt="Composition aux Fruits - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Zoom pour Oeuvre 5 -->
-    <div id="zoom-5" class="zoom-container">
-        <div class="zoom-content">
-            <img src="/api/placeholder/800/640" alt="Urban Dream - vue détaillée" class="zoom-img">
-            <div class="zoom-info">Zoom: 100%</div>
-            <div class="zoom-controls">
-                <button class="zoom-btn zoom-in">Zoom +</button>
-                <button class="zoom-btn zoom-reset">Réinitialiser</button>
-                <button class="zoom-btn zoom-out">Zoom -</button>
-                <a href="#galerie" class="zoom-btn">Fermer</a>
-            </div>
-        </div>
-    </div>
-   
+
+    <script src="scripts.js"></script>
 </body>
 </html>
