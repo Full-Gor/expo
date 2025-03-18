@@ -163,6 +163,8 @@
         .artwork-img {
             height: 250px;
             overflow: hidden;
+            position: relative;
+            cursor: pointer;
         }
         
         .artwork-img img {
@@ -174,6 +176,28 @@
         
         .artwork:hover .artwork-img img {
             transform: scale(1.1);
+        }
+        
+        .zoom-icon {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 5;
+        }
+        
+        .artwork-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
         
         .artwork-info {
@@ -203,6 +227,71 @@
             font-weight: 600;
             color: #a67c52;
             margin-bottom: 15px;
+        }
+        
+        /* Zoom container */
+        .zoom-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .zoom-container:target {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .zoom-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .zoom-img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            cursor: zoom-in;
+            transition: transform 0.3s;
+            transform-origin: center center;
+        }
+        
+        .zoom-controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .zoom-btn {
+            background-color: #a67c52;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .zoom-btn:hover {
+            background-color: #8a6642;
+        }
+        
+        .zoom-info {
+            color: white;
+            margin-top: 15px;
+            font-size: 14px;
         }
         
         /* À propos */
@@ -305,6 +394,56 @@
             resize: vertical;
         }
         
+        /* Modales */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal:target {
+            display: block;
+        }
+        
+        .modal-content {
+            background-color: #edcdaf;
+            margin: 50px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 8px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .close-modal:hover {
+            color: #a67c52;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #a67c52;
+        }
+        
         /* Pied de page */
         footer {
             background-color: #a67c52;
@@ -332,6 +471,25 @@
         
         .social-links a:hover {
             color: #edcdaf;
+        }
+        
+        /* Footer Amélioré */
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-link {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: #edcdaf;
+            text-decoration: underline;
         }
         
         /* Responsive - Amélioré pour smartphones et tablettes */
@@ -456,7 +614,9 @@
                 <!-- Oeuvre 1 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="/api/placeholder/400/320" alt="Toile abstraite">
+                        <img src="/elephant.jpg" alt="Toile elephant">
+                        <div class="zoom-icon" title="Voir en détail">🔍</div>
+                        <a href="#zoom-1" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Éclats d'Azur</h4>
@@ -471,6 +631,8 @@
                 <div class="artwork">
                     <div class="artwork-img">
                         <img src="/api/placeholder/400/320" alt="Paysage montagneux">
+                        <div class="zoom-icon" title="Voir en détail">🔍</div>
+                        <a href="#zoom-2" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Montagnes au Crépuscule</h4>
@@ -485,6 +647,8 @@
                 <div class="artwork">
                     <div class="artwork-img">
                         <img src="/api/placeholder/400/320" alt="Portrait contemporain">
+                        <div class="zoom-icon" title="Voir en détail">🔍</div>
+                        <a href="#zoom-3" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Regard Intérieur</h4>
@@ -499,6 +663,8 @@
                 <div class="artwork">
                     <div class="artwork-img">
                         <img src="/api/placeholder/400/320" alt="Nature morte">
+                        <div class="zoom-icon" title="Voir en détail">🔍</div>
+                        <a href="#zoom-4" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Composition aux Fruits</h4>
@@ -513,6 +679,8 @@
                 <div class="artwork">
                     <div class="artwork-img">
                         <img src="/api/placeholder/400/320" alt="Art urbain">
+                        <div class="zoom-icon" title="Voir en détail">🔍</div>
+                        <a href="#zoom-5" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Urban Dream</h4>
@@ -527,6 +695,8 @@
                 <div class="artwork">
                     <div class="artwork-img">
                         <img src="/api/placeholder/400/320" alt="Peinture florale">
+                        <div class="zoom-icon" title="Voir en détail">🔍</div>
+                        <a href="#zoom-6" class="artwork-link"></a>
                     </div>
                     <div class="artwork-info">
                         <h4>Floraison Sauvage</h4>
@@ -622,9 +792,239 @@
                     <a href="#">TW</a>
                     <a href="#">PT</a>
                 </div>
+                <div class="footer-links">
+                    <a href="#cgv-modal" class="footer-link">Conditions Générales de Vente</a>
+                    <a href="#retour-modal" class="footer-link">Service de Retour</a>
+                </div>
                 <p>&copy; 2025 GalerieArt. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
+    
+    <!-- Zoom containers -->
+    <!-- Zoom pour Oeuvre 1 -->
+    <div id="zoom-1" class="zoom-container">
+        <div class="zoom-content">
+            <img src="/elephant.jpg" alt="Éclats d'Azur - vue détaillée" class="zoom-img">
+            <div class="zoom-info">Zoom: 100%</div>
+            <div class="zoom-controls">
+                <button class="zoom-btn zoom-in">Zoom +</button>
+                <button class="zoom-btn zoom-reset">Réinitialiser</button>
+                <button class="zoom-btn zoom-out">Zoom -</button>
+                <a href="#galerie" class="zoom-btn">Fermer</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Conditions Générales de Vente -->
+    <div id="cgv-modal" class="modal">
+        <div class="modal-content">
+            <a href="#" class="close-modal">&times;</a>
+            <h3 class="modal-title">Conditions Générales de Vente</h3>
+            <div class="modal-body">
+                <h4>1. Commandes</h4>
+                <p>Toute commande implique l'adhésion sans réserve aux présentes conditions générales de vente. Les commandes sont fermes et définitives dès leur validation par le client.</p>
+                
+                <h4>2. Prix</h4>
+                <p>Les prix indiqués sont en euros (€) et comprennent la TVA au taux en vigueur. Les frais de livraison et d'emballage sont facturés en sus, selon les tarifs indiqués lors de la validation de la commande.</p>
+                
+                <h4>3. Paiement</h4>
+                <p>Le paiement s'effectue en ligne par carte bancaire (Visa, Mastercard) ou via un service de paiement sécurisé. L'œuvre n'est expédiée qu'après réception du paiement intégral.</p>
+                
+                <h4>4. Expédition et Livraison</h4>
+                <p>Les œuvres sont soigneusement emballées et expédiées par des transporteurs spécialisés. Les délais de livraison sont indicatifs et peuvent varier selon la destination. Une assurance couvrant la valeur totale de l'œuvre est incluse dans les frais d'expédition.</p>
+                
+                <h4>5. Certificat d'Authenticité</h4>
+                <p>Chaque œuvre est accompagnée d'un certificat d'authenticité signé par l'artiste ou par la galerie, attestant de son origine et de sa qualité.</p>
+                
+                <h4>6. Droit de Rétractation</h4>
+                <p>Conformément à la législation en vigueur, l'acheteur dispose d'un délai de 14 jours à compter de la réception de l'œuvre pour exercer son droit de rétractation, sans avoir à justifier de motifs ni à payer de pénalités.</p>
+                
+                <h4>7. Propriété Intellectuelle</h4>
+                <p>L'acquisition d'une œuvre n'entraîne pas le transfert des droits de propriété intellectuelle au profit de l'acheteur. Les droits de reproduction, de représentation et d'exploitation restent la propriété exclusive de l'artiste ou de ses ayants droit.</p>
+                
+                <h4>8. Garantie et Responsabilité</h4>
+                <p>La galerie garantit l'authenticité des œuvres vendues. En cas de litige, la responsabilité de la galerie est strictement limitée au montant de la transaction concernée.</p>
+                
+                <h4>9. Protection des Données Personnelles</h4>
+                <p>Les informations collectées lors de la commande sont nécessaires au traitement de celle-ci et sont destinées uniquement à la galerie. Conformément à la réglementation sur la protection des données, le client dispose d'un droit d'accès, de rectification et d'opposition aux données le concernant.</p>
+                
+                <h4>10. Loi Applicable et Juridiction Compétente</h4>
+                <p>Les présentes conditions générales de vente sont soumises au droit français. Tout litige relatif à l'interprétation ou à l'exécution des présentes conditions sera de la compétence exclusive des tribunaux français.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Service de Retour -->
+    <div id="retour-modal" class="modal">
+        <div class="modal-content">
+            <a href="#" class="close-modal">&times;</a>
+            <h3 class="modal-title">Service de Retour</h3>
+            <div class="modal-body">
+                <h4>Politique de Retour</h4>
+                <p>Chez GalerieArt, nous souhaitons que votre expérience d'achat soit entièrement satisfaisante. Si pour une raison quelconque vous n'êtes pas pleinement satisfait de votre acquisition, nous vous offrons la possibilité de retourner l'œuvre selon les conditions suivantes :</p>
+                
+                <h4>Délai de Retour</h4>
+                <p>Vous disposez de 14 jours calendaires à compter de la réception de l'œuvre pour nous informer de votre souhait de retour et de 14 jours supplémentaires pour nous renvoyer l'œuvre.</p>
+                
+                <h4>Procédure de Retour</h4>
+                <ol>
+                    <li>Contactez-nous par email à retours@galerieart.com ou par téléphone au +33 1 23 45 67 89 pour nous informer de votre souhait de retour.</li>
+                    <li>Notre service client vous fournira un numéro de retour et toutes les instructions nécessaires.</li>
+                    <li>Emballez soigneusement l'œuvre dans son emballage d'origine ou dans un emballage offrant une protection équivalente.</li>
+                    <li>Joignez à votre envoi le formulaire de retour que nous vous aurons fourni.</li>
+                    <li>Expédiez le colis à l'adresse indiquée, de préférence avec un service de suivi et d'assurance.</li>
+                </ol>
+                
+                <h4>Conditions du Retour</h4>
+                <p>L'œuvre doit être retournée dans son état d'origine, non endommagée, non modifiée et avec tous les accessoires et documents fournis (certificat d'authenticité, notice, etc.). Tout retour ne respectant pas ces conditions pourra faire l'objet d'une réduction du remboursement ou d'un refus.</p>
+                
+                <h4>Frais de Retour</h4>
+                <p>Les frais de retour sont à la charge du client, sauf dans le cas d'une erreur de notre part (œuvre endommagée à la livraison, erreur d'expédition, etc.).</p>
+                
+                <h4>Remboursement</h4>
+                <p>Une fois l'œuvre réceptionnée et son état vérifié, nous procéderons au remboursement dans un délai de 14 jours. Le remboursement sera effectué par le même moyen de paiement que celui utilisé lors de l'achat, sauf accord explicite pour un autre moyen de remboursement.</p>
+                
+                <h4>Cas Particuliers</h4>
+                <p>Les œuvres créées sur commande, personnalisées ou réalisées selon vos spécifications ne peuvent pas faire l'objet d'un retour, sauf en cas de défaut de conformité ou de vice caché.</p>
+                
+                <h4>Service Client</h4>
+                <p>Pour toute question concernant notre politique de retour, n'hésitez pas à contacter notre service client qui se fera un plaisir de vous accompagner dans vos démarches.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script pour les fonctionnalités de zoom -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables pour la fonction de zoom
+            let scale = 1;
+            const zoomFactor = 0.2;
+            const maxZoom = 3;
+            const minZoom = 1;
+            
+            // Ajouter les gestionnaires d'événements aux boutons de zoom
+            document.querySelectorAll('.zoom-in').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (scale < maxZoom) {
+                        scale += zoomFactor;
+                        updateZoom();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.zoom-out').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (scale > minZoom) {
+                        scale -= zoomFactor;
+                        updateZoom();
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.zoom-reset').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    scale = 1;
+                    updateZoom();
+                });
+            });
+            
+            // Mettre à jour le zoom
+            function updateZoom() {
+                const zoomImg = document.querySelectorAll('.zoom-img');
+                zoomImg.forEach(img => {
+                    img.style.transform = `scale(${scale})`;
+                });
+                
+                const zoomInfo = document.querySelectorAll('.zoom-info');
+                zoomInfo.forEach(info => {
+                    info.textContent = `Zoom: ${Math.round(scale * 100)}%`;
+                });
+            }
+            
+            // Permettre le zoom avec la molette de la souris
+            document.querySelectorAll('.zoom-content').forEach(content => {
+                content.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0 && scale < maxZoom) {
+                        scale += zoomFactor;
+                    } else if (e.deltaY > 0 && scale > minZoom) {
+                        scale -= zoomFactor;
+                    }
+                    updateZoom();
+                });
+            });
+        });
+    </script>
 </body>
-</html>
+</html> class="zoom-btn zoom-out">Zoom -</button>
+                <a href="#galerie" class="zoom-btn">Fermer</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Zoom pour Oeuvre 2 -->
+    <div id="zoom-2" class="zoom-container">
+        <div class="zoom-content">
+            <img src="/api/placeholder/800/640" alt="Montagnes au Crépuscule - vue détaillée" class="zoom-img">
+            <div class="zoom-info">Zoom: 100%</div>
+            <div class="zoom-controls">
+                <button class="zoom-btn zoom-in">Zoom +</button>
+                <button class="zoom-btn zoom-reset">Réinitialiser</button>
+                <button class="zoom-btn zoom-out">Zoom -</button>
+                <a href="#galerie" class="zoom-btn">Fermer</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Zoom pour Oeuvre 3 -->
+    <div id="zoom-3" class="zoom-container">
+        <div class="zoom-content">
+            <img src="/api/placeholder/800/640" alt="Regard Intérieur - vue détaillée" class="zoom-img">
+            <div class="zoom-info">Zoom: 100%</div>
+            <div class="zoom-controls">
+                <button class="zoom-btn zoom-in">Zoom +</button>
+                <button class="zoom-btn zoom-reset">Réinitialiser</button>
+                <button class="zoom-btn zoom-out">Zoom -</button>
+                <a href="#galerie" class="zoom-btn">Fermer</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Zoom pour Oeuvre 4 -->
+    <div id="zoom-4" class="zoom-container">
+        <div class="zoom-content">
+            <img src="/api/placeholder/800/640" alt="Composition aux Fruits - vue détaillée" class="zoom-img">
+            <div class="zoom-info">Zoom: 100%</div>
+            <div class="zoom-controls">
+                <button class="zoom-btn zoom-in">Zoom +</button>
+                <button class="zoom-btn zoom-reset">Réinitialiser</button>
+                <button class="zoom-btn zoom-out">Zoom -</button>
+                <a href="#galerie" class="zoom-btn">Fermer</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Zoom pour Oeuvre 5 -->
+    <div id="zoom-5" class="zoom-container">
+        <div class="zoom-content">
+            <img src="/api/placeholder/800/640" alt="Urban Dream - vue détaillée" class="zoom-img">
+            <div class="zoom-info">Zoom: 100%</div>
+            <div class="zoom-controls">
+                <button class="zoom-btn zoom-in">Zoom +</button>
+                <button class="zoom-btn zoom-reset">Réinitialiser</button>
+                <button class="zoom-btn zoom-out">Zoom -</button>
+                <a href="#galerie" class="zoom-btn">Fermer</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Zoom pour Oeuvre 6 -->
+    <div id="zoom-6" class="zoom-container">
+        <div class="zoom-content">
+            <img src="/api/placeholder/800/640" alt="Floraison Sauvage - vue détaillée" class="zoom-img">
+            <div class="zoom-info">Zoom: 100%</div>
+            <div class="zoom-controls">
+                <button class="zoom-btn zoom-in">Zoom +</button>
+                <button class="zoom-btn zoom-reset">Réinitialiser</button>
+                <button
