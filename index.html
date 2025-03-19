@@ -6,6 +6,87 @@
     <title>Galerie d'Art - Exposition et Vente de Toiles</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+    }
+    
+    .logo h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #333;
+    }
+    
+    .logo span {
+        color: #e74c3c;
+    }
+    
+    nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav ul li {
+        margin: 0 10px;
+    }
+    
+    /* Style des boutons avec effet de remplissage */
+    .fill-button {
+        display: inline-block;
+        position: relative;
+        padding: 10px 20px;
+        color: #a67c52;
+        text-decoration: none;
+        font-weight: 500;
+        border: 2px solid #a67c52;
+        border-radius: 4px;
+        overflow: hidden;
+        z-index: 1;
+        transition: color 0.3s ease;
+    }
+    
+    .fill-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: #a67c52;
+        z-index: -1;
+        transition: width 0.3s ease;
+    }
+    
+    .fill-button:hover {
+        color: #fff;
+    }
+    
+    .fill-button:hover::before {
+        width: 100%;
+    }
+    
+    /* Style spécial pour le bouton Boutique */
+    .nav-boutique {
+        background-color: #8a6642;
+        border-color: #e0cda9;
+        color: #fff;
+    }
+    
+    .nav-boutique::before {
+        background-color: #e0cda9;
+    }
+</style>
 <body>
     <!-- En-tête -->
     <header>
@@ -16,11 +97,11 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#accueil">Accueil</a></li>
-                        <li><a href="#galerie">Galerie</a></li>
-                        <li><a href="boutique.html" class="nav-boutique">Boutique</a></li>
-                        <li><a href="#a-propos">À propos</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#accueil" class="fill-button">Accueil</a></li>
+                        <li><a href="#galerie" class="fill-button">Galerie</a></li>
+                        <li><a href="boutique.html" class="fill-button nav-boutique">Boutique</a></li>
+                        <li><a href="#a-propos" class="fill-button">À propos</a></li>
+                        <li><a href="#contact" class="fill-button">Contact</a></li>
                     </ul>
                 </nav>
             </div>
