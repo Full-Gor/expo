@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galerie Sylvie Guyomard - Art & Émotions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Galerie d'Art - Exposition et Vente de Toiles</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
         
@@ -40,291 +40,7 @@
             overflow-x: hidden;
         }
         
-        /* Admin Bar Styles */
-        .admin-bar {
-            position: fixed;
-            top: -100px;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: white;
-            padding: 15px;
-            z-index: 10000;
-            transition: top 0.3s ease;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-        }
-        
-        .admin-bar.active {
-            top: 0;
-        }
-        
-        .admin-bar-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .admin-bar h3 {
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .admin-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .admin-btn {
-            padding: 8px 20px;
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .admin-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-        
-        .admin-btn.save {
-            background: #27ae60;
-            border-color: #27ae60;
-        }
-        
-        .admin-btn.export {
-            background: #3498db;
-            border-color: #3498db;
-        }
-        
-        .admin-btn.import {
-            background: #9b59b6;
-            border-color: #9b59b6;
-        }
-        
-        .admin-btn.reset {
-            background: #e74c3c;
-            border-color: #e74c3c;
-        }
-        
-        .admin-btn.exit {
-            background: #95a5a6;
-            border-color: #95a5a6;
-        }
-        
-        /* Options Panel */
-        .options-panel {
-            position: fixed;
-            right: -400px;
-            top: 80px;
-            width: 350px;
-            background: white;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-            z-index: 9999;
-            transition: right 0.3s ease;
-            max-height: 80vh;
-            overflow-y: auto;
-            border-radius: 10px 0 0 10px;
-        }
-        
-        .options-panel.active {
-            right: 0;
-        }
-        
-        .options-panel-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-            padding: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-        
-        .options-panel-content {
-            padding: 20px;
-        }
-        
-        .option-group {
-            margin-bottom: 25px;
-        }
-        
-        .option-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-        
-        .option-group input[type="text"],
-        .option-group input[type="color"],
-        .option-group input[type="tel"],
-        .option-group input[type="email"],
-        .option-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-        
-        .option-group input:focus,
-        .option-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-        
-        /* Editable Elements */
-        .editable {
-            outline: 2px dashed transparent;
-            transition: all 0.3s;
-            cursor: text;
-            position: relative;
-        }
-        
-        .editable:hover {
-            outline-color: rgba(52, 152, 219, 0.5);
-            background: rgba(52, 152, 219, 0.05);
-        }
-        
-        .editable:focus {
-            outline-color: #3498db;
-            background: rgba(52, 152, 219, 0.1);
-        }
-        
-        .editable-img {
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-        
-        .editable-img:hover {
-            opacity: 0.8;
-            outline: 3px solid #3498db;
-        }
-        
-        /* Section Delete Button */
-        .section-delete {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 40px;
-            height: 40px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            display: none;
-            z-index: 100;
-            transition: all 0.3s;
-        }
-        
-        .deletable-section {
-            position: relative;
-        }
-        
-        .deletable-section:hover .section-delete {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .section-delete:hover {
-            background: #c0392b;
-            transform: rotate(90deg) scale(1.1);
-        }
-        
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-            z-index: 999;
-            transition: var(--transition);
-        }
-        
-        body.admin-mode header {
-            top: 70px;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            cursor: pointer;
-            user-select: none;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 10px;
-        }
-        
-        nav a {
-            padding: 10px 20px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            border-radius: 25px;
-        }
-        
-        nav a:hover {
-            background: var(--primary-light);
-            color: var(--primary-dark);
-        }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(166, 124, 82, 0.1) 0%, rgba(224, 205, 169, 0.05) 100%);
-            padding-top: 100px;
-        }
-        
-        body.admin-mode .hero {
-            padding-top: 170px;
-        }
-        
-        .hero-content {
-            text-align: center;
-            animation: fadeInUp 1s ease;
-        }
-        
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -336,6 +52,169 @@
             }
         }
         
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header avec effet glassmorphism */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            z-index: 999;
+            transition: var(--transition);
+            animation: slideInDown 0.6s ease-out;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo img {
+            max-height: 60px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo img:hover {
+            transform: scale(1.1) rotate(2deg);
+        }
+        
+        /* Navigation améliorée */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+        }
+        
+        nav ul li {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        nav ul li:nth-child(1) { animation-delay: 0.1s; }
+        nav ul li:nth-child(2) { animation-delay: 0.2s; }
+        nav ul li:nth-child(3) { animation-delay: 0.3s; }
+        nav ul li:nth-child(4) { animation-delay: 0.4s; }
+        
+        .nav-link {
+            position: relative;
+            display: inline-block;
+            padding: 12px 25px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            width: 80%;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section Améliorée */
+        .hero {
+            margin-top: 90px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, rgba(166, 124, 82, 0.1) 0%, rgba(224, 205, 169, 0.05) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23a67c52" fill-opacity="0.03" d="M0,96L48,112C96,128,192,160,288,165.3C384,171,480,149,576,144C672,139,768,149,864,170.7C960,192,1056,224,1152,213.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(166, 124, 82, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+        
         .hero h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
@@ -344,6 +223,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
+            letter-spacing: -1px;
         }
         
         .hero p {
@@ -352,8 +232,10 @@
             font-size: 1.1rem;
             color: var(--text-light);
             line-height: 1.8;
+            animation: fadeIn 1.5s ease-out;
         }
         
+        /* Bouton modernisé */
         .btn {
             display: inline-block;
             padding: 15px 40px;
@@ -362,8 +244,29 @@
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
             box-shadow: var(--shadow-md);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .btn:hover {
@@ -371,19 +274,18 @@
             box-shadow: var(--shadow-lg);
         }
         
-        /* Sections */
-        section {
-            padding: 80px 0;
-        }
-        
+        /* Section Title amélioré */
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
         }
         
         .section-title h3 {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
+            font-weight: 700;
             color: var(--text-dark);
             position: relative;
             display: inline-block;
@@ -398,92 +300,204 @@
             width: 60px;
             height: 3px;
             background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            border-radius: 2px;
         }
         
-        /* Gallery */
+        /* Galerie avec effet masonry moderne */
         .gallery {
-            background: white;
+            padding: 100px 0;
+            background: var(--white);
         }
         
         .artworks {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
+            animation: fadeIn 1s ease-out;
         }
         
         .artwork {
-            background: white;
+            background: var(--white);
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            transition: all 0.3s;
+            transition: var(--transition);
+            transform: translateY(0);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
         
+        .artwork:nth-child(1) { animation-delay: 0.1s; }
+        .artwork:nth-child(2) { animation-delay: 0.2s; }
+        .artwork:nth-child(3) { animation-delay: 0.3s; }
+        .artwork:nth-child(4) { animation-delay: 0.4s; }
+        .artwork:nth-child(5) { animation-delay: 0.5s; }
+        .artwork:nth-child(6) { animation-delay: 0.6s; }
+        
         .artwork:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: var(--shadow-lg);
         }
         
         .artwork-img {
-            height: 300px;
+            position: relative;
             overflow: hidden;
+            height: 300px;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
         }
         
         .artwork-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
+            transition: transform 0.6s ease;
         }
         
-        .artwork:hover img {
-            transform: scale(1.1);
+        .artwork:hover .artwork-img img {
+            transform: scale(1.1) rotate(1deg);
+        }
+        
+        .zoom-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: var(--transition);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .artwork:hover .zoom-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .zoom-icon:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.2) rotate(90deg);
         }
         
         .artwork-info {
-            padding: 25px;
+            padding: 30px;
         }
         
         .artwork-info h4 {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+        
+        .artwork:hover .artwork-info h4 {
+            color: var(--primary-color);
         }
         
         .artist {
             color: var(--primary-color);
             font-weight: 500;
             margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
         
         .price {
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--primary-dark);
-            margin: 20px 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        /* About */
+        .price::after {
+            content: '✨';
+            font-size: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Section À propos modernisée */
         .about {
+            padding: 100px 0;
             background: linear-gradient(135deg, rgba(166, 124, 82, 0.05) 0%, rgba(224, 205, 169, 0.03) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(166, 124, 82, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: float 30s infinite linear reverse;
         }
         
         .about-content {
             display: flex;
             align-items: center;
-            gap: 50px;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .side-image {
+            flex: 1;
+            opacity: 0;
+            animation: slideInLeft 1s ease-out forwards;
+        }
+        
+        .side-image.right-image {
+            animation: slideInRight 1s ease-out forwards;
+        }
+        
+        .side-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+        
+        .side-image:hover img {
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 20px 60px rgba(166, 124, 82, 0.3);
         }
         
         .about-text {
-            flex: 1;
+            flex: 2;
+            padding: 0 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
         }
         
         .about-text h3 {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--text-dark);
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         .about-text p {
@@ -492,25 +506,22 @@
             color: var(--text-light);
         }
         
-        .about-image {
-            flex: 1;
-        }
-        
-        .about-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: var(--shadow-lg);
-        }
-        
-        /* Contact */
+        /* Contact Section moderne */
         .contact {
-            background: white;
+            padding: 100px 0;
+            background: var(--white);
         }
         
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 60px;
+            align-items: start;
+        }
+        
+        .contact-info {
+            opacity: 0;
+            animation: slideInLeft 1s ease-out forwards;
         }
         
         .contact-info h3 {
@@ -524,22 +535,37 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: var(--bg-light);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+        
+        .info-item:hover {
+            transform: translateX(10px);
+            background: linear-gradient(135deg, rgba(166, 124, 82, 0.1), rgba(224, 205, 169, 0.05));
         }
         
         .info-item i {
             font-size: 24px;
-            color: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
+        /* Formulaire moderne */
         .contact-form {
-            background: var(--bg-light);
-            padding: 30px;
-            border-radius: 20px;
+            opacity: 0;
+            animation: slideInRight 1s ease-out forwards;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-group label {
@@ -547,34 +573,65 @@
             margin-bottom: 8px;
             font-weight: 500;
             color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+        
+        .form-group:focus-within label {
+            color: var(--primary-color);
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             border: 2px solid transparent;
-            background: white;
-            border-radius: 10px;
-            transition: all 0.3s;
+            background: var(--bg-light);
+            border-radius: 12px;
+            font-family: inherit;
+            transition: var(--transition);
+            font-size: 15px;
         }
         
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-color);
+            background: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
         
         textarea {
-            min-height: 120px;
+            min-height: 150px;
             resize: vertical;
         }
         
-        /* Footer */
+        /* Footer moderne */
         footer {
             background: linear-gradient(135deg, var(--text-dark), #1a1a1a);
-            color: white;
-            padding: 50px 0 30px;
+            color: var(--white);
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light), var(--primary-color));
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+        
+        .footer-content {
             text-align: center;
         }
         
@@ -589,327 +646,464 @@
             width: 50px;
             height: 50px;
             background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--white);
             text-decoration: none;
-            transition: all 0.3s;
+            font-weight: 600;
+            transition: var(--transition);
         }
         
         .social-links a:hover {
             background: var(--primary-color);
-            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            transform: translateY(-5px) rotate(360deg);
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .admin-bar-content {
-                flex-direction: column;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-light);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-link:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* Modal modernisée */
+        .modal,
+        .zoom-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal:target,
+        .zoom-container:target {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content,
+        .zoom-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 0.4s ease-out;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
             }
-            
-            .options-panel {
-                width: 100%;
-                right: -100%;
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 24px;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg) scale(1.1);
+            background: var(--accent-color);
+        }
+        
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+        
+        .modal-body {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        .modal-body h4 {
+            color: var(--primary-color);
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+        }
+        
+        /* Zoom controls améliorés */
+        .zoom-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .zoom-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .zoom-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .zoom-img {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .zoom-info {
+            text-align: center;
+            margin: 15px 0;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        /* Bouton scroll top amélioré */
+        .scroll-top-btn {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 28px;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 900;
+            cursor: pointer;
+        }
+        
+        .scroll-top-btn:hover {
+            transform: translateY(-5px) rotate(180deg);
+            box-shadow: 0 10px 40px rgba(166, 124, 82, 0.4);
+        }
+        
+        .scroll-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
             }
             
             nav ul {
-                flex-direction: column;
-                gap: 5px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
             }
             
             .artworks {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .about-content {
                 flex-direction: column;
             }
             
+            .about-text {
+                padding: 20px 0;
+            }
+            
             .contact-content {
                 grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .side-image {
+                width: 100%;
             }
         }
         
-        /* Notification Toast */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #27ae60;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            display: none;
-            z-index: 10001;
-            animation: slideInRight 0.3s ease;
-        }
-        
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-        
-        .toast.show {
-            display: block;
-        }
-        
-        /* Hidden file inputs */
-        .hidden-input {
-            display: none;
-        }
-        
-        /* Loading overlay */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10002;
-        }
-        
-        .loading-overlay.active {
-            display: flex;
-        }
-        
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
+        /* Loading animation */
+        @keyframes loading {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        /* Smooth page transitions */
+        section {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
         }
     </style>
 </head>
 <body>
-    <!-- Admin Bar (hidden by default) -->
-    <div class="admin-bar" id="adminBar">
-        <div class="admin-bar-content">
-            <h3>🎨 Mode Administration</h3>
-            <div class="admin-buttons">
-                <button class="admin-btn save" onclick="saveChanges()">💾 Sauvegarder</button>
-                <button class="admin-btn" onclick="toggleOptionsPanel()">⚙️ Options</button>
-                <button class="admin-btn export" onclick="exportData()">📥 Exporter</button>
-                <button class="admin-btn import" onclick="document.getElementById('importFile').click()">📤 Importer</button>
-                <button class="admin-btn reset" onclick="resetSite()">🔄 Réinitialiser</button>
-                <button class="admin-btn exit" onclick="exitAdminMode()">❌ Quitter</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Options Panel -->
-    <div class="options-panel" id="optionsPanel">
-        <div class="options-panel-header">
-            <h3>⚙️ Options du Site</h3>
-        </div>
-        <div class="options-panel-content">
-            <div class="option-group">
-                <label>Couleur Principale</label>
-                <input type="color" id="primaryColor" value="#a67c52" onchange="updateColors()">
-            </div>
-            <div class="option-group">
-                <label>Couleur Secondaire</label>
-                <input type="color" id="accentColor" value="#e74c3c" onchange="updateColors()">
-            </div>
-            <div class="option-group">
-                <label>Téléphone</label>
-                <input type="tel" id="globalPhone" value="+33 1 23 45 67 89" onchange="updateGlobalInfo()">
-            </div>
-            <div class="option-group">
-                <label>Email</label>
-                <input type="email" id="globalEmail" value="contact@galerieart.com" onchange="updateGlobalInfo()">
-            </div>
-            <div class="option-group">
-                <label>Adresse</label>
-                <textarea id="globalAddress" onchange="updateGlobalInfo()">123 Avenue des Arts, 75001 Paris</textarea>
-            </div>
-            <div class="option-group">
-                <label>Facebook URL</label>
-                <input type="text" id="fbUrl" placeholder="https://facebook.com/..." onchange="updateSocialLinks()">
-            </div>
-            <div class="option-group">
-                <label>Instagram URL</label>
-                <input type="text" id="igUrl" placeholder="https://instagram.com/..." onchange="updateSocialLinks()">
-            </div>
-        </div>
-    </div>
-    
-    <!-- Hidden file inputs -->
-    <input type="file" id="importFile" class="hidden-input" accept=".json" onchange="importData(event)">
-    
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
-    
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader"></div>
-    </div>
-    
-    <!-- Header -->
+    <!-- En-tête -->
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <h1 id="siteTitle" class="editable">Galerie Sylvie Guyomard</h1>
+                    <img src="/LOGO.jpg" alt="GalerieArt Logo">
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#home" class="editable">Accueil</a></li>
-                        <li><a href="#gallery" class="editable">Galerie</a></li>
-                        <li><a href="#about" class="editable">À propos</a></li>
-                        <li><a href="#contact" class="editable">Contact</a></li>
+                        <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                        <li><a href="#galerie" class="nav-link">Galerie</a></li>
+                        <li><a href="#a-propos" class="nav-link">À propos</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
-    
-    <!-- Hero Section -->
-    <section class="hero deletable-section" id="home">
-        <button class="section-delete" onclick="deleteSection(this)">×</button>
-        <div class="container">
-            <div class="hero-content">
-                <h2 class="editable">Découvrez l'Art des Émotions</h2>
-                <p class="editable">Une collection unique où se mêlent tendresse humaine et beauté animale. Chaque œuvre raconte une histoire d'amour et de connexion profonde avec la nature.</p>
-                <a href="#gallery" class="btn editable">Explorer la Collection</a>
-            </div>
+
+    <!-- Bannière Hero -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <h2>Découvrez l'Art Contemporain</h2>
+            <p>Explorez une collection exclusive de dessins et peintures de Sylvie Guyomard. Un talent émergent qui se distingue par son originalité et sa passion. Ces œuvres uniques sont disponibles à l'achat en ligne.</p>
+            <a href="#galerie" class="btn">Explorer la Collection</a>
         </div>
     </section>
     
-    <!-- Gallery Section -->
-    <section class="gallery deletable-section" id="gallery">
-        <button class="section-delete" onclick="deleteSection(this)">×</button>
+    <!-- Galerie -->
+    <section class="gallery" id="galerie">
         <div class="container">
             <div class="section-title">
-                <h3 class="editable">Œuvres Disponibles</h3>
+                <h3>Notre Collection</h3>
             </div>
             <div class="artworks">
-                <!-- Artwork 1 -->
+                <!-- Oeuvre 1 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23e0cda9' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23a67c52' font-family='sans-serif' font-size='20'%3ELes Mamans Tendresse%3C/text%3E%3C/svg%3E" 
-                             alt="Les Mamans Tendresse" 
-                             class="editable-img"
-                             onclick="changeImage(this)">
+                        <img src="/elephant.jpg" alt="Les mamans tendresse">
+                        <a href="#zoom-modal" class="zoom-icon" onclick="openZoomModal('/elephant.jpg', 'Les mamans tendresse')">🔍</a>
                     </div>
                     <div class="artwork-info">
-                        <h4 class="editable">Les Mamans Tendresse</h4>
-                        <p class="artist editable">par Sylvie Guyomard</p>
-                        <p class="editable">Une œuvre touchante qui célèbre l'amour maternel dans toute sa splendeur.</p>
-                        <p class="price editable">80 €</p>
-                        <a href="#" class="btn editable">Acheter</a>
+                        <h4>Les mamans tendresse</h4>
+                        <p class="artist">par Sylvie Guyomard</p>
+                        <p class="description">Une composition touchante aux tons doux évoquant la tendresse maternelle, réalisée à l'acrylique sur toile.</p>
+                        <p class="price">80 €</p>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
                     </div>
                 </div>
                 
-                <!-- Artwork 2 -->
+                <!-- Oeuvre 2 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23e0cda9' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23a67c52' font-family='sans-serif' font-size='20'%3ELes Papas Tendresse%3C/text%3E%3C/svg%3E" 
-                             alt="Les Papas Tendresse" 
-                             class="editable-img"
-                             onclick="changeImage(this)">
+                        <img src="/Image (10).jpg" alt="Les mamans tendresse">
+                        <a href="#zoom-modal" class="zoom-icon" onclick="openZoomModal('/Image (10).jpg', 'Les mamans tendresse')">🔍</a>
                     </div>
                     <div class="artwork-info">
-                        <h4 class="editable">Les Papas Tendresse</h4>
-                        <p class="artist editable">par Sylvie Guyomard</p>
-                        <p class="editable">L'expression de la tendresse paternelle capturée avec émotion et délicatesse.</p>
-                        <p class="price editable">80 €</p>
-                        <a href="#" class="btn editable">Acheter</a>
+                        <h4>Les mamans tendresse</h4>
+                        <p class="artist">par Sylvie Guyomard</p>
+                        <p class="description">Expression de l'amour maternel dans toute sa splendeur, réalisée à l'huile sur toile.</p>
+                        <p class="price">80 €</p>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
                     </div>
                 </div>
                 
-                <!-- Artwork 3 -->
+                <!-- Oeuvre 3 -->
                 <div class="artwork">
                     <div class="artwork-img">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23e0cda9' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23a67c52' font-family='sans-serif' font-size='20'%3ERêverie Animale%3C/text%3E%3C/svg%3E" 
-                             alt="Rêverie Animale" 
-                             class="editable-img"
-                             onclick="changeImage(this)">
+                        <img src="/Image (11).jpg" alt="Les papas tendresse">
+                        <a href="#zoom-modal" class="zoom-icon" onclick="openZoomModal('/Image (11).jpg', 'Les papas tendresse')">🔍</a>
                     </div>
                     <div class="artwork-info">
-                        <h4 class="editable">Rêverie Animale</h4>
-                        <p class="artist editable">par Sylvie Guyomard</p>
-                        <p class="editable">Un voyage onirique dans le monde animal, où la beauté rencontre l'émotion.</p>
-                        <p class="price editable">95 €</p>
-                        <a href="#" class="btn editable">Acheter</a>
+                        <h4>Les papas tendresse</h4>
+                        <p class="artist">par Sylvie Guyomard</p>
+                        <p class="description">Portrait contemporain explorant la paternité et l'émotion, technique mixte sur toile.</p>
+                        <p class="price">80 €</p>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
+                    </div>
+                </div>
+                
+                <!-- Oeuvre 4 -->
+                <div class="artwork">
+                    <div class="artwork-img">
+                        <img src="/Image (12).jpg" alt="Les mamans tendresse">
+                        <a href="#zoom-modal" class="zoom-icon" onclick="openZoomModal('/Image (12).jpg', 'Les mamans tendresse')">🔍</a>
+                    </div>
+                    <div class="artwork-info">
+                        <h4>Les mamans tendresse</h4>
+                        <p class="artist">par Sylvie Guyomard</p>
+                        <p class="description">Composition moderne célébrant les liens familiaux, huile sur toile.</p>
+                        <p class="price">80 €</p>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
+                    </div>
+                </div>
+                
+                <!-- Oeuvre 5 -->
+                <div class="artwork">
+                    <div class="artwork-img">
+                        <img src="/Image (13).jpg" alt="Les mamans tendresse">
+                        <a href="#zoom-modal" class="zoom-icon" onclick="openZoomModal('/Image (13).jpg', 'Les mamans tendresse')">🔍</a>
+                    </div>
+                    <div class="artwork-info">
+                        <h4>Les mamans tendresse</h4>
+                        <p class="artist">par Sylvie Guyomard</p>
+                        <p class="description">Œuvre vibrante d'émotion, mêlant couleurs et textures sur toile.</p>
+                        <p class="price">80 €</p>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
+                    </div>
+                </div>
+                
+                <!-- Oeuvre 6 -->
+                <div class="artwork">
+                    <div class="artwork-img">
+                        <img src="/Image (14).jpg" alt="Les papas tendresse">
+                        <a href="#zoom-modal" class="zoom-icon" onclick="openZoomModal('/Image (14).jpg', 'Les papas tendresse')">🔍</a>
+                    </div>
+                    <div class="artwork-info">
+                        <h4>Les papas tendresse</h4>
+                        <p class="artist">par Sylvie Guyomard</p>
+                        <p class="description">Exploration de la tendresse paternelle, acrylique et techniques mixtes sur grande toile.</p>
+                        <p class="price">80 €</p>
+                        <a href="https://www.etsy.com/" target="_blank" class="btn">Acheter</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- About Section -->
-    <section class="about deletable-section" id="about">
-        <button class="section-delete" onclick="deleteSection(this)">×</button>
+
+    <!-- À propos -->
+    <section class="about" id="a-propos">
         <div class="container">
             <div class="section-title">
-                <h3 class="editable">Mon Histoire</h3>
+                <h3>À Propos de l'Artiste</h3>
             </div>
             <div class="about-content">
-                <div class="about-text">
-                    <h3 class="editable">Une passion née de l'émotion</h3>
-                    <p class="editable">Depuis mon enfance, je suis fascinée par la beauté qui nous entoure : les paysages majestueux, les regards humains chargés d'histoire, et la grâce naturelle des animaux.</p>
-                    <p class="editable">Ma démarche artistique s'articule autour d'un thème central : les émotions. Je cherche à capturer ces moments fugaces où l'âme se révèle, que ce soit dans un regard, un geste, ou une posture.</p>
-                    <p class="editable">Formée aux techniques traditionnelles et modernes, j'ai développé un style unique qui mélange réalisme et touches impressionnistes. Chaque œuvre est une invitation à ressentir, à s'émouvoir, à se connecter.</p>
-                    <p class="editable">En 2025, j'ai décidé de partager ma passion avec le monde entier grâce à cette galerie en ligne. 10% de chaque vente est reversé à des associations de protection animale.</p>
-                    <a href="#contact" class="btn editable">Me contacter</a>
+                <!-- Image à gauche -->
+                <div class="side-image left-image">
+                    <img src="/tof1.jpg" alt="Notre galerie">
                 </div>
-                <div class="about-image">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='600'%3E%3Crect fill='%23e0cda9' width='500' height='600'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23a67c52' font-family='sans-serif' font-size='24'%3EPhoto de l'artiste%3C/text%3E%3C/svg%3E" 
-                         alt="Sylvie Guyomard" 
-                         class="editable-img"
-                         onclick="changeImage(this)">
+                
+                <!-- Texte au centre -->
+                <div class="about-text">
+                    <h3>Une passion pour l'art depuis 2010</h3>
+                    <p>Fascinée depuis l'enfance par la beauté des paysages, des êtres humains et des animaux, la planète Terre ne cesse de m'émerveiller. J'ai dessiné épisodiquement jusqu'à trouver un lien entre tout ce que j'aimais observer et comprendre : les émotions.</p>
+                    <p>J'ai allié ma passion pour le dessin et la peinture à l'exploration des émotions humaines, tout en mettant également en lumière celles des animaux, qui, eux aussi, expriment des sentiments.</p>
+                    <p>Au fil des années, j'ai évolué dans divers domaines : la peinture en bâtiment, le décor peint, et le bénévolat, tout en exerçant une autre activité professionnelle. En quête de perfection dans le dessin, j'ai suivi une formation à distance avec Lignes et Formations en 2023.</p>
+                    <p>En 2025, en collaboration avec mon fils, talentueux développeur web, nous avons créé un site entièrement dédié à ma galerie. Ce site offre une expérience immersive et accessible à tous.</p>
+                    <p>Chaque œuvre est minutieusement sélectionnée pour sa qualité et son originalité, célébrant les liens entre les êtres humains, les végétaux et les animaux.</p>
+                    <p>Fidèle à mes valeurs, 10% de chaque œuvre vendue sont reversés directement à une association caritative.</p>
+                    <a href="#contact" class="btn">Me Contacter</a>
+                </div>
+                
+                <!-- Image à droite -->
+                <div class="side-image right-image">
+                    <img src="/tof2.jpg" alt="Œuvre d'art">
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Contact Section -->
-    <section class="contact deletable-section" id="contact">
-        <button class="section-delete" onclick="deleteSection(this)">×</button>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
         <div class="container">
             <div class="section-title">
-                <h3 class="editable">Contact</h3>
+                <h3>Contactez-Nous</h3>
             </div>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3 class="editable">Restons en contact</h3>
+                    <h3>Informations</h3>
                     <div class="info-item">
                         <i>📍</i>
-                        <p class="editable address-field">123 Avenue des Arts, 75001 Paris</p>
+                        <p>123 Avenue des Arts, 75001 Paris</p>
                     </div>
                     <div class="info-item">
                         <i>📞</i>
-                        <p class="editable phone-field">+33 1 23 45 67 89</p>
+                        <p>+33 1 23 45 67 89</p>
                     </div>
                     <div class="info-item">
                         <i>✉️</i>
-                        <p class="editable email-field">contact@galerieart.com</p>
+                        <p>contact@galerieart.com</p>
                     </div>
                     <div class="info-item">
                         <i>🕒</i>
-                        <p class="editable">Lundi - Samedi : 10h - 18h</p>
+                        <p>Mardi - Samedi : 10h - 19h</p>
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form onsubmit="handleFormSubmit(event)">
+                    <form>
                         <div class="form-group">
                             <label for="name">Nom</label>
                             <input type="text" id="name" required>
@@ -919,432 +1113,268 @@
                             <input type="email" id="email" required>
                         </div>
                         <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
                             <label for="message">Message</label>
                             <textarea id="message" required></textarea>
                         </div>
-                        <button type="submit" class="btn">Envoyer</button>
+                        <button type="submit" class="btn">Envoyer le Message</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
-    <footer class="deletable-section">
-        <button class="section-delete" onclick="deleteSection(this)">×</button>
+    <footer>
         <div class="container">
-            <div class="social-links">
-                <a href="#" class="editable" data-social="facebook">📘</a>
-                <a href="#" class="editable" data-social="instagram">📷</a>
-                <a href="#" class="editable" data-social="twitter">🐦</a>
-                <a href="#" class="editable" data-social="pinterest">📌</a>
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#">FB</a>
+                    <a href="#">IG</a>
+                    <a href="#">TW</a>
+                    <a href="#">PT</a>
+                </div>
+                <div class="footer-links">
+                    <a href="#cgv-modal" class="footer-link">Conditions Générales de Vente</a>
+                    <a href="#retour-modal" class="footer-link">Service de Retour</a>
+                </div>
+                <p>&copy; 2025 GalerieArt Sylvie Guyomard. Tous droits réservés.</p>
             </div>
-            <p class="editable">© 2025 Galerie Sylvie Guyomard - Tous droits réservés</p>
-            <p class="editable">Créé avec ❤️ pour l'art et les émotions</p>
         </div>
     </footer>
     
+    <!-- Zoom Modal -->
+    <div id="zoom-modal" class="zoom-container">
+        <div class="zoom-content">
+            <a href="#" class="close-modal">&times;</a>
+            <img src="" alt="" class="zoom-img" id="modal-image">
+            <div class="zoom-info">Zoom: 100%</div>
+            <div class="zoom-controls">
+                <button class="zoom-btn zoom-in">Zoom +</button>
+                <button class="zoom-btn zoom-reset">Réinitialiser</button>
+                <button class="zoom-btn zoom-out">Zoom -</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal CGV -->
+    <div id="cgv-modal" class="modal">
+        <div class="modal-content">
+            <a href="#" class="close-modal">&times;</a>
+            <h3 class="modal-title">Conditions Générales de Vente</h3>
+            <div class="modal-body">
+                <h4>1. Commandes</h4>
+                <p>Toute commande implique l'adhésion sans réserve aux présentes conditions générales de vente.</p>
+                
+                <h4>2. Prix</h4>
+                <p>Les prix sont indiqués en euros TTC. Ils incluent la TVA applicable au jour de la commande.</p>
+                
+                <h4>3. Paiement</h4>
+                <p>Le paiement s'effectue par carte bancaire via notre plateforme sécurisée.</p>
+                
+                <h4>4. Livraison</h4>
+                <p>Les œuvres sont expédiées sous 5 à 10 jours ouvrables après confirmation du paiement.</p>
+                
+                <h4>5. Retours</h4>
+                <p>Vous disposez de 14 jours pour retourner votre achat. Les frais de retour sont à votre charge.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Retour -->
+    <div id="retour-modal" class="modal">
+        <div class="modal-content">
+            <a href="#" class="close-modal">&times;</a>
+            <h3 class="modal-title">Service de Retour</h3>
+            <div class="modal-body">
+                <h4>Politique de Retour</h4>
+                <p>Chez GalerieArt, nous souhaitons que votre expérience d'achat soit entièrement satisfaisante.</p>
+                
+                <h4>Délai de retour</h4>
+                <p>14 jours à compter de la réception de votre commande.</p>
+                
+                <h4>Conditions</h4>
+                <p>L'œuvre doit être retournée dans son emballage d'origine, en parfait état.</p>
+                
+                <h4>Remboursement</h4>
+                <p>Le remboursement sera effectué sous 7 jours après réception et vérification de l'œuvre.</p>
+                
+                <h4>Contact</h4>
+                <p>Pour toute demande de retour, contactez-nous à : retour@galerieart.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bouton retour en haut -->
+    <a href="#" class="scroll-top-btn" id="scrollTopBtn">↑</a>
+
     <script>
-        // Global variables
-        let isAdminMode = false;
-        let autoSaveInterval;
-        let hasUnsavedChanges = false;
-        const STORAGE_KEY = 'galerieArt_siteData';
-        const ADMIN_PASSWORD = 'admin123'; // À changer en production
+        // Gestion du zoom modal
+        let zoomLevel = 100;
         
-        // Initialize site
-        document.addEventListener('DOMContentLoaded', function() {
-            loadSavedData();
-            setupEventListeners();
-            setupTripleClick();
-        });
-        
-        // Triple-click to activate admin mode
-        function setupTripleClick() {
-            let clickCount = 0;
-            let clickTimer;
+        function openZoomModal(imgSrc, imgTitle) {
+            const modal = document.getElementById('zoom-modal');
+            const modalImg = document.getElementById('modal-image');
             
-            document.getElementById('siteTitle').addEventListener('click', function(e) {
-                clickCount++;
-                
-                if (clickCount === 1) {
-                    clickTimer = setTimeout(() => {
-                        clickCount = 0;
-                    }, 500);
-                }
-                
-                if (clickCount === 3) {
-                    clearTimeout(clickTimer);
-                    clickCount = 0;
-                    showPasswordPrompt();
-                }
-            });
+            modalImg.src = imgSrc;
+            modalImg.alt = imgTitle;
+            zoomLevel = 100;
+            updateZoom();
+            
+            modal.style.display = 'flex';
+            setTimeout(() => modal.style.opacity = '1', 10);
+            document.body.style.overflow = 'hidden';
+            
+            event.preventDefault();
         }
         
-        // Show password prompt
-        function showPasswordPrompt() {
-            const password = prompt('🔐 Entrez le mot de passe administrateur:');
-            
-            if (password === ADMIN_PASSWORD || password === '') {
-                enterAdminMode();
-                showToast('✅ Mode admin activé!', 'success');
-            } else if (password !== null) {
-                showToast('❌ Mot de passe incorrect', 'error');
-            }
-        }
-        
-        // Enter admin mode
-        function enterAdminMode() {
-            isAdminMode = true;
-            document.body.classList.add('admin-mode');
-            document.getElementById('adminBar').classList.add('active');
-            
-            // Make elements editable
-            document.querySelectorAll('.editable').forEach(el => {
-                el.contentEditable = true;
-                el.addEventListener('input', markAsChanged);
-                el.addEventListener('contextmenu', handleRightClick);
-            });
-            
-            // Start auto-save
-            autoSaveInterval = setInterval(autoSave, 60000); // Every 60 seconds
-        }
-        
-        // Exit admin mode
-        function exitAdminMode() {
-            if (hasUnsavedChanges) {
-                if (!confirm('⚠️ Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter?')) {
-                    return;
-                }
-            }
-            
-            isAdminMode = false;
-            document.body.classList.remove('admin-mode');
-            document.getElementById('adminBar').classList.remove('active');
-            document.getElementById('optionsPanel').classList.remove('active');
-            
-            // Remove editable
-            document.querySelectorAll('.editable').forEach(el => {
-                el.contentEditable = false;
-            });
-            
-            // Stop auto-save
-            clearInterval(autoSaveInterval);
-            
-            showToast('👋 Mode admin désactivé', 'info');
-        }
-        
-        // Toggle options panel
-        function toggleOptionsPanel() {
-            document.getElementById('optionsPanel').classList.toggle('active');
-        }
-        
-        // Mark as changed
-        function markAsChanged() {
-            hasUnsavedChanges = true;
-        }
-        
-        // Handle right-click deletion
-        function handleRightClick(e) {
-            if (!isAdminMode) return;
-            
-            e.preventDefault();
-            if (confirm('🗑️ Supprimer cet élément?')) {
-                e.target.remove();
-                markAsChanged();
-                saveChanges();
-            }
-        }
-        
-        // Change image
-        function changeImage(img) {
-            if (!isAdminMode) return;
-            
-            const choice = confirm('Utiliser une URL (OK) ou uploader un fichier (Annuler)?');
-            
-            if (choice) {
-                // URL input
-                const url = prompt('Entrez l\'URL de l\'image:');
-                if (url) {
-                    img.src = url;
-                    markAsChanged();
-                    saveChanges();
-                }
-            } else {
-                // File upload
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = 'image/*';
-                input.onchange = function(e) {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            img.src = e.target.result;
-                            markAsChanged();
-                            saveChanges();
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                };
-                input.click();
-            }
-        }
-        
-        // Delete section
-        function deleteSection(btn) {
-            if (confirm('⚠️ Supprimer toute cette section?')) {
-                btn.parentElement.remove();
-                markAsChanged();
-                saveChanges();
-            }
-        }
-        
-        // Save changes
-        function saveChanges() {
-            try {
-                const siteData = {
-                    timestamp: new Date().toISOString(),
-                    content: document.documentElement.innerHTML,
-                    styles: getComputedStyles(),
-                    metadata: {
-                        title: document.getElementById('siteTitle').textContent,
-                        lastModified: new Date().toLocaleString('fr-FR')
-                    }
-                };
-                
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(siteData));
-                hasUnsavedChanges = false;
-                showToast('✅ Modifications sauvegardées!', 'success');
-            } catch (error) {
-                console.error('Erreur de sauvegarde:', error);
-                showToast('❌ Erreur de sauvegarde', 'error');
-            }
-        }
-        
-        // Load saved data
-        function loadSavedData() {
-            try {
-                const savedData = localStorage.getItem(STORAGE_KEY);
-                if (savedData) {
-                    const data = JSON.parse(savedData);
-                    
-                    // Create a temporary element to parse the saved HTML
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = data.content;
-                    
-                    // Update specific sections while preserving functionality
-                    const sections = ['hero', 'gallery', 'about', 'contact'];
-                    sections.forEach(sectionId => {
-                        const savedSection = tempDiv.querySelector(`#${sectionId}`);
-                        const currentSection = document.getElementById(sectionId);
-                        if (savedSection && currentSection) {
-                            // Update content while preserving event listeners
-                            const editables = savedSection.querySelectorAll('.editable');
-                            const currentEditables = currentSection.querySelectorAll('.editable');
-                            
-                            editables.forEach((el, index) => {
-                                if (currentEditables[index]) {
-                                    if (el.tagName === 'IMG') {
-                                        currentEditables[index].src = el.src;
-                                    } else {
-                                        currentEditables[index].innerHTML = el.innerHTML;
-                                    }
-                                }
-                            });
-                            
-                            // Update images
-                            const images = savedSection.querySelectorAll('.editable-img');
-                            const currentImages = currentSection.querySelectorAll('.editable-img');
-                            images.forEach((img, index) => {
-                                if (currentImages[index]) {
-                                    currentImages[index].src = img.src;
-                                }
-                            });
-                        }
-                    });
-                    
-                    console.log('✅ Données chargées depuis localStorage');
-                }
-            } catch (error) {
-                console.error('Erreur de chargement:', error);
-            }
-        }
-        
-        // Auto-save
-        function autoSave() {
-            if (hasUnsavedChanges) {
-                saveChanges();
-                showToast('💾 Sauvegarde automatique', 'info');
-            }
-        }
-        
-        // Export data
-        function exportData() {
-            const siteData = {
-                version: '1.0',
-                timestamp: new Date().toISOString(),
-                content: document.documentElement.innerHTML,
-                metadata: {
-                    title: document.getElementById('siteTitle').textContent,
-                    exportDate: new Date().toLocaleString('fr-FR')
-                }
-            };
-            
-            const blob = new Blob([JSON.stringify(siteData, null, 2)], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `galerie_backup_${new Date().getTime()}.json`;
-            a.click();
-            
-            showToast('📥 Données exportées!', 'success');
-        }
-        
-        // Import data
-        function importData(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try {
-                        const data = JSON.parse(e.target.result);
-                        
-                        if (confirm('⚠️ Ceci remplacera tout le contenu actuel. Continuer?')) {
-                            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-                            location.reload();
-                        }
-                    } catch (error) {
-                        showToast('❌ Fichier invalide', 'error');
-                    }
-                };
-                reader.readAsText(file);
-            }
-        }
-        
-        // Reset site
-        function resetSite() {
-            if (confirm('⚠️ Réinitialiser le site à son état original?')) {
-                if (confirm('⚠️⚠️ Cette action est irréversible! Êtes-vous sûr?')) {
-                    localStorage.removeItem(STORAGE_KEY);
-                    location.reload();
-                }
-            }
-        }
-        
-        // Update colors
-        function updateColors() {
-            const primary = document.getElementById('primaryColor').value;
-            const accent = document.getElementById('accentColor').value;
-            
-            document.documentElement.style.setProperty('--primary-color', primary);
-            document.documentElement.style.setProperty('--accent-color', accent);
-            
-            markAsChanged();
-        }
-        
-        // Update global info
-        function updateGlobalInfo() {
-            const phone = document.getElementById('globalPhone').value;
-            const email = document.getElementById('globalEmail').value;
-            const address = document.getElementById('globalAddress').value;
-            
-            document.querySelectorAll('.phone-field').forEach(el => el.textContent = phone);
-            document.querySelectorAll('.email-field').forEach(el => el.textContent = email);
-            document.querySelectorAll('.address-field').forEach(el => el.textContent = address);
-            
-            markAsChanged();
-        }
-        
-        // Update social links
-        function updateSocialLinks() {
-            // Implementation for updating social links
-            markAsChanged();
-        }
-        
-        // Get computed styles
-        function getComputedStyles() {
-            const root = document.documentElement;
-            const styles = getComputedStyle(root);
-            return {
-                primaryColor: styles.getPropertyValue('--primary-color'),
-                accentColor: styles.getPropertyValue('--accent-color'),
-                textDark: styles.getPropertyValue('--text-dark'),
-                textLight: styles.getPropertyValue('--text-light')
-            };
-        }
-        
-        // Show toast notification
-        function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast show';
-            
-            if (type === 'error') {
-                toast.style.background = '#e74c3c';
-            } else if (type === 'success') {
-                toast.style.background = '#27ae60';
-            } else {
-                toast.style.background = '#3498db';
-            }
-            
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.opacity = '0';
             setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
         }
         
-        // Handle form submission
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            showToast('📧 Message envoyé avec succès!', 'success');
-            e.target.reset();
+        function updateZoom() {
+            const zoomImg = document.getElementById('modal-image');
+            const zoomInfo = document.querySelector('.zoom-info');
+            zoomImg.style.transform = `scale(${zoomLevel / 100})`;
+            zoomInfo.textContent = `Zoom: ${zoomLevel}%`;
         }
         
-        // Setup event listeners
-        function setupEventListeners() {
-            // Keyboard shortcuts
-            document.addEventListener('keydown', function(e) {
-                if (isAdminMode) {
-                    // Ctrl+S to save
-                    if (e.ctrlKey && e.key === 's') {
-                        e.preventDefault();
-                        saveChanges();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fermeture des modales
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modal = this.closest('.modal, .zoom-container');
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }, 300);
+                });
+            });
+            
+            // Fermeture au clic extérieur
+            document.querySelectorAll('.modal, .zoom-container').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.style.opacity = '0';
+                        setTimeout(() => {
+                            modal.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                        }, 300);
                     }
-                    // Ctrl+Z to undo (basic)
-                    if (e.ctrlKey && e.key === 'z') {
-                        e.preventDefault();
-                        if (confirm('⏪ Annuler les dernières modifications?')) {
-                            loadSavedData();
-                        }
-                    }
-                    // ESC to exit admin mode
-                    if (e.key === 'Escape') {
-                        exitAdminMode();
-                    }
+                });
+            });
+            
+            // Contrôles de zoom
+            document.querySelector('.zoom-in').addEventListener('click', function() {
+                if (zoomLevel < 200) {
+                    zoomLevel += 20;
+                    updateZoom();
                 }
             });
             
-            // Prevent navigation away with unsaved changes
-            window.addEventListener('beforeunload', function(e) {
-                if (hasUnsavedChanges) {
-                    e.preventDefault();
-                    e.returnValue = '';
+            document.querySelector('.zoom-out').addEventListener('click', function() {
+                if (zoomLevel > 40) {
+                    zoomLevel -= 20;
+                    updateZoom();
                 }
             });
-        }
-        
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            
+            document.querySelector('.zoom-reset').addEventListener('click', function() {
+                zoomLevel = 100;
+                updateZoom();
+            });
+            
+            // Bouton retour en haut
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+                
+                // Parallax effect sur hero
+                const hero = document.querySelector('.hero');
+                const scrolled = window.pageYOffset;
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            });
+            
+            scrollTopBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
+            
+            // Navigation smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && !href.includes('modal')) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Animation au scroll pour les éléments
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observer les sections
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.8s ease-out';
+                observer.observe(section);
+            });
+            
+            // Effet de typing pour le titre principal
+            const heroTitle = document.querySelector('.hero h2');
+            if (heroTitle) {
+                const text = heroTitle.textContent;
+                heroTitle.textContent = '';
+                let i = 0;
+                
+                function typeWriter() {
+                    if (i < text.length) {
+                        heroTitle.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+                
+                setTimeout(typeWriter, 500);
+            }
         });
     </script>
 </body>
